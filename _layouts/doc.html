@@ -1,0 +1,41 @@
+---
+layout: default
+---
+{%- assign pkg = site.data.packages | where: "id", page.package | first -%}
+<div class="shell">
+    {% include sidebar.html %}
+    <div class="nav-scrim" data-nav-toggle hidden></div>
+    <main class="main" id="content">
+        <article class="doc">
+            {% include prompt.html %}
+            <header class="doc-header">
+                {%- if pkg %}<p class="doc-eyebrow"><a href="{{ pkg.path | relative_url }}">{{ pkg.name }}</a>{% assign
+                sec = pkg.sections | where: "id", page.section | first %}{% if sec and sec.id != "start" %} <span
+                        class="dim">/</span> {{ sec.title }}{% endif %}</p>{% endif %}
+                <h1>{{ page.heading | default: page.title }}</h1>
+                {%- if page.description %}<p class="doc-lede">{{ page.description | markdownify | remove: "
+                <p>" | remove: "</p>" | strip }}</p>{% endif %}
+                {%- if page.layout == "component" %}{% include component-header.html %}{% endif %}
+            </header>
+            <div class="doc-body">
+                {{ content }}
+            </div>
+            <footer class="doc-footer">
+                {% include pager.html %}
+                <div class="doc-meta">
+          <span class="doc-meta-links">
+            <a href="https://github.com/{{ site.repository }}/edit/{{ site.edit_branch }}/{{ page.edit_path | default: page.path }}">Edit this page on GitHub</a>
+            <a class="doc-meta-help" href="{{ site.discord_url }}">Questions? Ask on Discord</a>
+          </span>
+                    {%- if page.last_modified_at %}<span>last updated <time
+                        datetime="{{ page.last_modified_at | date_to_xmlschema }}">{{ page.last_modified_at | date: "%Y-%m-%d" }}</time></span>{%
+                    endif %}
+                </div>
+            </footer>
+        </article>
+        <aside class="toc" aria-label="On this page" data-toc hidden>
+            <p class="toc-title"># on this page</p>
+            <ul data-toc-list></ul>
+        </aside>
+    </main>
+</div>

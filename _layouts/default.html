@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="{{ page.lang | default: site.lang | default: 'en' }}">
+<head>
+    {% include head.html %}
+</head>
+<body class="layout-{{ page.layout }}">
+<a class="skip-link" href="#content">Skip to content</a>
+{% include header.html %}
+{{ content }}
+{% include footer.html %}
+{% include search.html %}
+<script>window.VRCT = {searchIndex: "{{ '/search.json' | relative_url }}", baseurl: "{{ site.baseurl }}"};</script>
+<script src="{{ '/assets/js/site.js' | relative_url }}" defer></script>
+</body>
+</html>

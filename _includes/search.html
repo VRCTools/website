@@ -1,0 +1,15 @@
+<div class="search-modal" data-search-modal hidden>
+    <div class="search-backdrop" data-search-close></div>
+    <div class="search-dialog" role="dialog" aria-modal="true" aria-label="Search">
+        <label class="search-input-row">
+            <span class="p-dollar" aria-hidden="true">$ grep -ri</span>
+            <input type="search" class="search-input" data-search-input placeholder="&quot;persisted float&quot;"
+                   autocomplete="off" spellcheck="false" aria-label="Search query">
+            <kbd>esc</kbd>
+        </label>
+        <ol class="search-results" data-search-results aria-live="polite"></ol>
+        <div class="search-footer">
+            <span><kbd>↑</kbd><kbd>↓</kbd> navigate</span><span><kbd>↵</kbd> open</span><span><kbd>/</kbd> or <kbd>ctrl</kbd>+<kbd>k</kbd> search</span>
+        </div>
+    </div>
+</div>

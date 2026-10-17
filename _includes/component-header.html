@@ -1,0 +1,51 @@
+{%- comment -%}
+Rendered by the `component` layout. Reads the following front matter:
+since:       package version which introduced the component(s)
+kinds:       list of value kinds supported (local, synchronized, persisted)
+networked:   true when (some variants of) the component synchronize state with other players
+components:  list of { name, class, menu, file, prefab } describing the concrete Udon behaviours
+{%- endcomment -%}
+
+{%- assign pkg = site.data.packages | where: "id", page.package | first -%}
+<div class="badges">
+    {%- if page.since %}<span class="badge badge-since" title="Available since version {{ page.since }}">since v{{ page.since }}</span>{%
+    endif %}
+    {%- for k in page.kinds %}<span class="badge badge-kind badge-{{ k }}">{{ k }}</span>{% endfor %}
+    {%- if page.networked %}<span class="badge badge-net" title="Synchronizes state over the network">networked</span>{%
+    endif %}
+</div>
+{%- if page.components %}
+<div class="component-listing">
+    <div class="listing-cmd" aria-hidden="true"><span class="p-dollar">$</span> ls -l <span
+            class="p-arg">components/</span></div>
+    <div class="table-wrap">
+        <table class="component-table">
+            <thead>
+            <tr>
+                <th>Component</th>
+                <th>Add Component menu / prefab</th>
+                <th>Source</th>
+            </tr>
+            </thead>
+            <tbody>
+            {%- for c in page.components %}
+            <tr>
+                <td><span class="c-name">{{ c.name }}</span>{% if c.class %}<code class="c-class">{{ c.class }}</code>{%
+                    endif %}
+                </td>
+                <td>{% if c.menu %}<code class="c-menu">{{ c.menu | replace: "/", " › " }}</code>{% else %}<span
+                        class="dim">&mdash;</span>{% endif %}
+                    {%- if c.prefab %}<span class="c-prefab" title="Runtime/Prefabs/{{ c.prefab }}">prefab: {{ c.prefab | split: "/" | last }}</span>{%
+                    endif %}
+                </td>
+                <td>{% if c.file and pkg.source_root %}<a href="{{ pkg.source_root }}{{ c.file | uri_escape }}"
+                                                          title="{{ c.file }}">{{ c.file | split: "/" | last
+                    }}&nbsp;↗</a>{% else %}<span class="dim">&mdash;</span>{% endif %}
+                </td>
+            </tr>
+            {%- endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{%- endif %}

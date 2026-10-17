@@ -1,0 +1,21 @@
+// Portal mark (assets/icons/logo-mark.svg) - colored through --logo-a / --logo-b, which inherit into <use>
+.logo-mark { flex: none; }
+
+// Icons referenced from assets/icons/ (see _includes/icon.html)
+.icon { flex: none; display: block; }
+
+// Split tone word mark: lowercase "vrc" in white (ink on light backgrounds), "tools" and a blinking "_" in brand purple
+.wordmark {
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  .wm-a { color: var(--logo-a); }
+  .wm-b, .wm-cursor { color: var(--brand); }
+  .wm-cursor { animation: blink 1.1s steps(1) infinite; }
+}
+
+@keyframes blink { 50% { opacity: 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .wordmark .wm-cursor { animation: none; }
+}

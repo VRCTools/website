@@ -1,0 +1,12 @@
+---
+layout: doc
+---
+{%- assign pkg = site.data.packages | where: "tag", page.tags[0] | first -%}
+<p class="post-meta">
+    <span class="badge badge-since">tag: v{{ page.version }}</span>
+    <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%Y-%m-%d" }}</time>
+    {%- if pkg %} &middot; <a href="{{ pkg.path | append: 'changelog/' | relative_url }}">all {{ pkg.short }}
+    releases</a>{% endif %}
+    {%- if pkg %} &middot; <a href="{{ pkg.repo }}/releases/tag/{{ page.version }}">release on GitHub ↗</a>{% endif %}
+</p>
+{{ content }}

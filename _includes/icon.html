@@ -1,0 +1,8 @@
+{%- comment -%}
+References an icon from assets/icons/ via <use>, so it can be styled with `color` (currentColor) and CSS custom
+properties like inline SVG.
+Parameters: name (file name without .svg), px (size in pixels, default 18), class
+(The size parameter is called `px` because `include.size` returns the number of parameters when unset.)
+{%- endcomment -%}
+{%- assign icon_size = include.px | default: 18 -%}
+<svg class="icon{% if include.class %} {{ include.class }}{% endif %}" width="{{ icon_size }}" height="{{ icon_size }}" aria-hidden="true" focusable="false"><use href="{{ '/assets/icons/' | append: include.name | append: '.svg#icon' | relative_url }}"/></svg>

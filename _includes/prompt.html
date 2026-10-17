@@ -1,0 +1,16 @@
+{%- comment -%} Shell prompt style breadcrumb, e.g. `vrctools@docs:~/world-utils/values $ cat boolean.md` {%- endcomment -%}
+{%- assign crumbs = page.url | split: "/" -%}
+{%- assign dir = "~" -%}
+{%- assign last = crumbs | last -%}
+<div class="prompt" aria-hidden="true">
+    <span class="p-user">vrctools@docs</span><span class="p-sep">:</span><span class="p-path">~
+  {%- for c in crumbs -%}
+    {%- if c == "" or forloop.last -%}{%- continue -%}{%- endif -%}
+    /{{ c }}
+  {%- endfor -%}
+  </span><span class="p-dollar">$</span>
+    {%- if page.name == "index.md" or page.name == "index.html" %} <span class="p-cmd">ls</span>{% if last %} <span
+        class="p-arg">{{ last }}/</span>{% endif %}
+    {%- else %} <span class="p-cmd">man</span> <span class="p-arg">{{ last | default: page.slug }}</span>
+    {%- endif -%}
+</div>

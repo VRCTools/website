@@ -1,0 +1,26 @@
+# Notable worlds built with VRCTools packages, shown on the landing page.
+# Using VRCTools in your world? Open a pull request and add it here.
+#
+#   name:        display name (required) - rendered exactly as written
+#   kind:        short label, e.g. "club worlds" or "world series", "creator" (required)
+#   description: one sentence (optional)
+#   url:         link to the world / world series, e.g. a VRChat world or group page (optional)
+#   packages:    VRCTools packages in use, matching `id` in _data/packages.yml (optional)
+
+- name: simplicity
+  kind: club worlds
+  description: known for innovative world concepts and music variety
+  url:
+  packages: [world-utils, event]
+
+- name: simply
+  kind: world series
+  description: free to use club worlds
+  url:
+  packages: [world-utils, event]
+
+- name: serenity
+  kind: world series
+  description: comfortable hangout worlds
+  url:
+  packages: [world-utils, event]

@@ -1,0 +1,119 @@
+# ----------------------------------------------------------------------------------------------------------------------
+# VRCTools Documentation
+#
+# This file is NOT reloaded automatically by `jekyll serve` - restart the server after changing it.
+# ----------------------------------------------------------------------------------------------------------------------
+
+title: VRCTools
+tagline: Tools for VRChat world creators
+description: >-
+  Documentation for the open source VRCTools packages - utilities, values, converters and applicators that take the
+  pain out of building VRChat worlds with Udon.
+lang: en
+
+# The production URL. The site is served from the root of its custom domain, so there is no base path.
+url: "https://vrctools.io"
+baseurl: ""
+
+# Package repository which is added to Creator Companion (or ALCOM, vrc-get, ...)
+vpm_url: "https://vrctools.github.io/VPM/index.json"
+# Human-readable listing page of the package repository
+vpm_home: "https://vrctools.github.io/VPM/"
+
+# Unity version required by the current VRChat SDK - update when VRChat moves to a new version.
+# Use `{{ site.unity_version }}` in pages instead of hard-coding the version.
+unity_version: "2022.3"
+
+# Community Discord - support, questions & feedback
+discord_url: "https://discord.gg/FGrt9wv5CF"
+
+# Repository used for "Edit this page" links
+repository: VRCTools/website
+edit_branch: main
+
+social:
+  name: VRCTools
+  links:
+    - https://github.com/VRCTools
+    - https://discord.gg/FGrt9wv5CF
+
+# Square logo used in structured data (search results); the social preview image is set per page via `image`
+logo: /assets/brand/png/app-icon-512.png
+
+# ----------------------------------------------------------------------------------------------------------------------
+# Build settings
+# ----------------------------------------------------------------------------------------------------------------------
+markdown: kramdown
+highlighter: rouge
+kramdown:
+  input: GFM
+  hard_wrap: false
+  auto_ids: true
+  syntax_highlighter_opts:
+    disable: false
+    css_class: highlight
+
+sass:
+  style: compressed
+  sourcemap: never
+
+permalink: pretty
+
+plugins:
+  - jekyll-feed
+  - jekyll-last-modified-at
+  - jekyll-redirect-from
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+feed:
+  path: changelog.xml
+  posts_limit: 30
+
+last-modified-at:
+  date-format: "%Y-%m-%d"
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - CONTRIBUTING.md
+  - LICENSE
+  - vendor/
+  - .ruby-version
+  - .idea/
+
+# ----------------------------------------------------------------------------------------------------------------------
+# Defaults - pages inherit their package & navigation section from the directory they live in. Contributors usually
+# only need to provide `title`, `description` and `nav_order` in a page's front matter.
+# ----------------------------------------------------------------------------------------------------------------------
+defaults:
+  - scope: { path: "" }
+    values: { layout: doc, image: /assets/brand/og-image.png }
+  - scope: { path: "", type: posts }
+    values: { layout: post, permalink: "/docs/changelog/:slug/" }
+
+  - scope: { path: "docs/world-utils" }
+    values: { package: world-utils, section: start }
+  - scope: { path: "docs/world-utils/concepts" }
+    values: { section: concepts }
+  - scope: { path: "docs/world-utils/values" }
+    values: { section: values }
+  - scope: { path: "docs/world-utils/applicators" }
+    values: { section: applicators }
+  - scope: { path: "docs/world-utils/converters" }
+    values: { section: converters }
+  - scope: { path: "docs/world-utils/ui" }
+    values: { section: ui }
+  - scope: { path: "docs/world-utils/player" }
+    values: { section: player }
+  - scope: { path: "docs/world-utils/utilities" }
+    values: { section: utilities }
+  - scope: { path: "docs/world-utils/guides" }
+    values: { section: guides }
+
+  - scope: { path: "docs/event" }
+    values: { package: event, section: start }
+
+  - scope: { path: "docs/common" }
+    values: { package: common, section: reference }

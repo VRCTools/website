@@ -1,0 +1,53 @@
+# Packages documented on this site. The sidebar renders one tree per package, grouping pages by `section`
+# (see `defaults` in _config.yml) and ordering them by `nav_order`.
+- id: world-utils
+  name: World Utilities
+  short: VRCTWorldUtils
+  tag: VRCTWorldUtils          # tag used by changelog posts in _posts/
+  vpm_id: io.vrctools.world
+  version: 0.7.0
+  repo: https://github.com/VRCTools/VRCTWorldUtils
+  source_root: https://github.com/VRCTools/VRCTWorldUtils/blob/main/Packages/io.vrctools.world/
+  path: /docs/world-utils/
+  summary: >-
+    Local, synchronized and persisted values plus the converters, applicators and UI components that wire them into
+    your world - without writing a single line of Udon.
+  sections:
+    - { id: start, title: Start here }
+    - { id: concepts, title: Concepts }
+    - { id: values, title: Values }
+    - { id: converters, title: Converters }
+    - { id: applicators, title: Applicators }
+    - { id: ui, title: UI }
+    - { id: player, title: Player }
+    - { id: utilities, title: Utilities }
+    - { id: guides, title: Guides }
+
+- id: event
+  name: Event System
+  short: VRCTEvent
+  tag: VRCTEvent
+  vpm_id: io.vrctools.event
+  version: 0.2.0
+  repo: https://github.com/VRCTools/VRCTEvent
+  path: /docs/event/
+  summary: >-
+    A tiny publish/subscribe event system for UdonSharp behaviours. Used by World Utilities under the hood.
+  sections:
+    - { id: start, title: Start here }
+
+- id: common
+  name: Common Library
+  short: VRCTCommon
+  tag: VRCTCommon
+  vpm_id: io.vrctools.common
+  version: 0.1.0
+  repo: https://github.com/VRCTools/VRCTCommon
+  source_root: https://github.com/VRCTools/VRCTCommon/blob/main/Packages/io.vrctools.common/
+  path: /docs/common/
+  summary: >-
+    Shared building blocks for UdonSharp scripts - a congestion aware base class for synchronized behaviours plus
+    array and animator helpers. Used by the other VRCTools packages.
+  sections:
+    - { id: start, title: Start here }
+    - { id: reference, title: Reference }

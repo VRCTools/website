@@ -1,0 +1,24 @@
+{%- comment -%} Previous / next links following the sidebar order of the current package {%- endcomment -%}
+{%- assign pkg = site.data.packages | where: "id", page.package | first -%}
+{%- if pkg -%}
+  {%- assign pkg_pages = site.pages | where: "package", pkg.id | where_exp: "p", "p.nav_exclude != true" -%}
+  {%- assign flat = "" | split: "" -%}
+  {%- for sec in pkg.sections -%}
+    {%- assign sec_pages = pkg_pages | where: "section", sec.id | sort: "nav_order", "last" -%}
+    {%- assign flat = flat | concat: sec_pages -%}
+  {%- endfor -%}
+  {%- for p in flat -%}
+    {%- if p.url == page.url -%}
+      {%- assign prev_index = forloop.index0 | minus: 1 -%}
+      {%- assign next_index = forloop.index0 | plus: 1 -%}
+      {%- if prev_index >= 0 %}{% assign prev = flat[prev_index] %}{% endif -%}
+      {%- assign next = flat[next_index] -%}
+    {%- endif -%}
+  {%- endfor -%}
+  {%- if prev or next %}
+<nav class="pager" aria-label="Pagination">
+  {%- if prev %}<a class="pager-prev" href="{{ prev.url | relative_url }}"><span class="pager-dir">cd ..</span><span class="pager-title">← {{ prev.nav_title | default: prev.title }}</span></a>{% else %}<span></span>{% endif %}
+  {%- if next %}<a class="pager-next" href="{{ next.url | relative_url }}"><span class="pager-dir">cd next</span><span class="pager-title">{{ next.nav_title | default: next.title }} →</span></a>{% endif %}
+</nav>
+  {%- endif -%}
+{%- endif -%}

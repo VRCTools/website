@@ -1,0 +1,7 @@
+{%- comment -%}
+Split tone portal mark (assets/icons/logo-mark.svg). Colors follow the active theme via the --logo-a / --logo-b
+custom properties (see _sass/_tokens.scss).
+Parameters: px (size in pixels), class
+{%- endcomment -%}
+{%- assign logo_class = "logo-mark " | append: include.class | strip -%}
+{% include icon.html name="logo-mark" px=include.px class=logo_class %}

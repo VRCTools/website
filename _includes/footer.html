@@ -1,0 +1,21 @@
+<footer class="site-footer">
+    <div class="footer-inner">
+        <div class="footer-brand">
+            {% include logo-mark.html px=22 %}
+            <span>&copy; {{ site.time | date: "%Y" }} VRCTools &middot; Docs licensed under the
+        <a href="https://github.com/{{ site.repository }}/blob/{{ site.edit_branch }}/LICENSE">Apache License 2.0</a></span>
+        </div>
+        <p class="footer-legal">
+            VRChat is a registered trademark of VRChat Inc. Unity is a trademark or registered trademark of Unity
+            Technologies or its affiliates in the U.S. and elsewhere. This is a community project and is not operated by,
+            affiliated with or endorsed by VRChat Inc. or Unity Technologies.
+        </p>
+        <p class="footer-links">
+            <a href="https://github.com/VRCTools">github</a> &middot;
+            <a href="{{ site.discord_url }}">discord</a> &middot;
+            <a href="{{ site.vpm_home }}">vpm</a> &middot;
+            <a href="{{ '/docs/project/contributing/' | relative_url }}">contribute</a> &middot;
+            <a href="{{ '/docs/project/brand/' | relative_url }}">brand</a>
+        </p>
+    </div>
+</footer>

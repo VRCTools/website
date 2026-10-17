@@ -1,0 +1,4 @@
+# Binary files are stored in Git LFS (the deploy workflow checks out with `lfs: true`).
+# SVG files are text and intentionally stay in regular Git.
+*.png filter=lfs diff=lfs merge=lfs -text
+*.zip filter=lfs diff=lfs merge=lfs -text

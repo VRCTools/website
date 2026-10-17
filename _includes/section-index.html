@@ -1,0 +1,8 @@
+{%- comment -%} Lists all pages of the current package section as cards (used by section index pages) {%- endcomment -%}
+{%- assign items = site.pages | where: "package", page.package | where: "section", page.section | where_exp: "p", "p.url != page.url" | where_exp: "p", "p.nav_exclude != true" | sort: "nav_order", "last" -%}
+<ul class="cards">
+    {%- for p in items %}
+    <li><a href="{{ p.url | relative_url }}"><strong>{{ p.title }}</strong>{% if p.description %}<span>{{ p.description | markdownify | strip_html | strip }}</span>{%
+        endif %}</a></li>
+    {%- endfor %}
+</ul>

@@ -1,0 +1,15 @@
+# Sidebar navigation
+# ------------------
+
+# Links shown at the very top of the sidebar
+links:
+  - { title: Getting Started, url: /docs/getting-started/ }
+
+# Additional trees rendered below the package trees - same look as the packages
+sections:
+  - title: project/
+    pages:
+      - { title: Contributing, url: /docs/project/contributing/ }
+      - { title: Writing Documentation, url: /docs/project/documentation/ }
+      - { title: Brand & Press Kit, url: /docs/project/brand/ }
+      - { title: Discord Rules, url: /docs/project/discord-rules/ }

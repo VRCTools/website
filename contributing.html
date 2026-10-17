@@ -1,0 +1,20 @@
+---
+title: Contributing
+description: How to report bugs, suggest features and contribute code or documentation to VRCTools.
+permalink: /docs/project/contributing/
+nav_exclude: true
+edit_path: CONTRIBUTING.md
+keywords: [contributing, pull request, issue, bug report, feature request, AI, license]
+---
+{%- comment -%}
+  Renders CONTRIBUTING.md from the repository root so GitHub and the website always show the same guide. The file's
+  own top level heading is dropped since the layout already renders the page title. This page lives in the root so
+  `include_relative` can reach the file; `permalink` places it below /docs/.
+{%- endcomment -%}
+{%- capture guide -%}{% include_relative CONTRIBUTING.md %}{%- endcapture -%}
+{%- comment -%}
+  The guide links to https://vrctools.io/... so the links work on GitHub - on the site they are rewritten to
+  site-relative links, which keeps local previews (and any other host) on the current site.
+{%- endcomment -%}
+{%- assign local_link = "](" | append: site.baseurl | append: "/" -%}
+{{ guide | remove_first: "# Contributing to VRCTools" | replace: "](https://vrctools.io/", local_link | markdownify }}

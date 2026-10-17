@@ -1,0 +1,23 @@
+---
+layout: home
+title: Not found
+permalink: /404.html
+sitemap: false
+search_exclude: true
+---
+<section class="hero" style="grid-template-columns: minmax(0, 1fr);">
+    <div class="term">
+        <div class="term-bar"><i></i><i></i><i></i><span>404</span></div>
+        <pre><span class="t-p">➜</span> <span class="t-c">cd</span> <span class="t-a" id="missing-path">this/page</span>
+<span style="color: var(--red)">cd: no such file or directory</span>
+<span class="t-p">➜</span> <span class="t-c">ls</span> <span class="t-a">~</span>
+<a href="{{ '/' | relative_url }}">home/</a>  <a
+                    href="{{ '/docs/getting-started/' | relative_url }}">getting-started/</a>{% for pkg in site.data.packages %}  <a
+                    href="{{ pkg.path | relative_url }}">{{ pkg.id }}/</a>{% endfor %}
+<span class="t-p">➜</span> <span class="t-d"># the page may have moved - try searching with</span> <kbd>/</kbd>
+<span class="t-p">➜</span> <span class="t-cursor"></span></pre>
+    </div>
+</section>
+<script>
+    document.getElementById("missing-path").textContent = decodeURIComponent(location.pathname);
+</script>

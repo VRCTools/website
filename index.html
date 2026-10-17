@@ -1,0 +1,103 @@
+---
+layout: home
+title: VRCTools Docs
+description: Documentation for the open source VRCTools packages for VRChat world creators.
+search_exclude: true
+redirect_from:
+- /packages/
+---
+<section class="hero">
+    <div>
+        <div class="hero-logo">
+            {% include logo-mark.html px=64 %}
+            {% include wordmark.html %}
+        </div>
+        <h1>Build VRChat worlds,<br><span class="accent">not boilerplate.</span></h1>
+        <p class="hero-sub">
+            Open source Udon packages for world creators. Drop in values, wire them to your world with converters and
+            applicators, and ship settings menus, toggles and synced state without writing scripts - or extend
+            everything
+            from UdonSharp when you want to.
+        </p>
+        <div class="hero-actions">
+            <a class="btn" href="vcc://vpm/addRepo?url={{ site.vpm_url | uri_escape }}">+ Add to VCC</a>
+            <a class="btn btn-ghost" href="{{ '/docs/getting-started/' | relative_url }}">Getting Started</a>
+        </div>
+    </div>
+    <div class="term" aria-label="Installing World Utilities with vrc-get">
+        <div class="term-bar"><i></i><i></i><i></i><span>~/MyWorld &mdash; zsh</span></div>
+        <pre><span class="t-d"># add the VRCTools package repository (once)</span>
+<span class="t-p">➜</span> <span class="t-c">vrc-get repo add</span> <span class="t-a">{{ site.vpm_url }}</span>
+
+<span class="t-d"># install World Utilities into the current project</span>
+<span class="t-p">➜</span> <span class="t-c">vrc-get install</span> <span class="t-a">io.vrctools.world</span>
+
+<span class="t-d"># later: check for updates</span>
+<span class="t-p">➜</span> <span class="t-c">vrc-get outdated</span>
+<span class="t-p">➜</span> <span class="t-cursor"></span></pre>
+    </div>
+</section>
+
+<section class="home-section">
+    <h2>packages</h2>
+    <div class="pkg-grid">
+        {%- for pkg in site.data.packages %}
+        <a class="pkg-card" href="{{ pkg.path | relative_url }}">
+            <div class="pkg-head"><span class="pkg-name">{{ pkg.name }}</span><span class="pkg-id">{{ pkg.vpm_id }}@{{ pkg.version }}</span>
+            </div>
+            <p>{{ pkg.summary }}</p>
+            <span class="pkg-cta">cd {{ pkg.id }}/ →</span>
+        </a>
+        {%- endfor %}
+    </div>
+</section>
+
+<section class="home-section">
+    <h2>why vrctools</h2>
+    <div class="feature-grid">
+        <div class="feature"><h3>No-code first</h3>
+            <p>Every component is configured from the inspector. Prefabs cover the common cases so you can drag, drop
+                and test.</p></div>
+        <div class="feature"><h3>Local, synced, persisted</h3>
+            <p>Pick per-player, instance-wide or saved-across-visits state with the same building blocks.</p></div>
+        <div class="feature"><h3>Script friendly</h3>
+            <p>Everything is a regular UdonSharp behaviour with events you can subscribe to from your own code.</p>
+        </div>
+        <div class="feature"><h3>Open source</h3>
+            <p>Apache 2.0 licensed. Found a bug or a gap in these docs? Pull requests are welcome.</p></div>
+    </div>
+</section>
+
+<section class="home-section" id="used-by">
+    <h2>used by</h2>
+    <ul class="showcase">
+        {%- for entry in site.data.showcase %}
+        <li class="showcase-item">
+            {%- if entry.url %}<a href="{{ entry.url }}" class="showcase-link">{% else %}
+            <div class="showcase-link">{% endif %}
+                <span class="showcase-avatar" aria-hidden="true">{{ entry.name | slice: 0 }}</span>
+                <span class="showcase-body">
+          <span class="showcase-name">{{ entry.name }}{% if entry.url %} <span class="dim">↗</span>{% endif %}</span>
+          <span class="showcase-kind">{{ entry.kind }}</span>
+          {%- if entry.description %}<span class="showcase-desc">{{ entry.description }}</span>{% endif %}
+          {%- if entry.packages %}<span class="showcase-pkgs">{% for id in entry.packages %}{% assign pkg = site.data.packages | where: "id", id | first %}<span
+                        class="badge">{{ pkg.short | default: id }}</span>{% endfor %}</span>{% endif %}
+        </span>
+                {%- if entry.url %}
+        </a>{% else %}</div>{% endif %}
+        </li>
+        {%- endfor %}
+    </ul>
+    <p class="showcase-cta">Using VRCTools in your world?
+        <a href="https://github.com/{{ site.repository }}/edit/{{ site.edit_branch }}/_data/showcase.yml">Add it to the
+            list</a>.</p>
+</section>
+
+<section class="home-section" id="community">
+    <h2>community</h2>
+    <div class="community">
+        <p>Questions, support or feedback? Join the VRCTools Discord to talk to the developers and other world creators.
+            Please read the <a href="{{ '/docs/project/discord-rules/' | relative_url }}">server rules</a> first.</p>
+        <a class="btn" href="{{ site.discord_url }}">discord --join</a>
+    </div>
+</section>

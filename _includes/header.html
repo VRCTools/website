@@ -1,0 +1,35 @@
+<header class="site-header">
+    <button class="icon-btn nav-toggle" type="button" aria-label="Toggle navigation" aria-controls="sidebar"
+            aria-expanded="false" data-nav-toggle>
+        {% include icon.html name="menu" px=20 %}
+    </button>
+    <div class="brand">
+        <a class="brand-home" href="{{ '/' | relative_url }}" aria-label="VRCTools home">
+            {% include logo-mark.html px=28 %}
+            {% include wordmark.html %}
+        </a>
+        {%- assign url_prefix = page.url | slice: 0, 6 %}
+        {%- if url_prefix == "/docs/" %}
+        <a class="brand-suffix" href="{{ '/docs/' | relative_url }}">docs</a>
+        {%- endif %}
+    </div>
+    <button class="search-trigger" type="button" data-search-open aria-label="Search the documentation">
+        <span class="search-prompt">$ grep</span>
+        <span class="search-placeholder">search docs…</span>
+        <kbd>/</kbd>
+    </button>
+    <nav class="header-links" aria-label="External">
+        <a class="icon-btn" href="{{ site.discord_url }}" aria-label="Join the VRCTools Discord"
+           title="Discord - support &amp; questions">
+            {% include icon.html name="discord" %}
+        </a>
+        <a class="icon-btn" href="https://github.com/VRCTools" aria-label="VRCTools on GitHub" title="GitHub">
+            {% include icon.html name="github" %}
+        </a>
+        <button class="icon-btn theme-toggle" type="button" data-theme-toggle aria-label="Toggle light/dark theme"
+                title="Toggle theme">
+            {% include icon.html name="sun" class="i-sun" %}
+            {% include icon.html name="moon" class="i-moon" %}
+        </button>
+    </nav>
+</header>

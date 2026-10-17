@@ -1,0 +1,72 @@
+// ---------------------------------------------------------------------------------------------------------------------
+// Design tokens. The brand purple (#8B5CF6) is used for the logo & solid surfaces; text accents use a lighter (dark
+// theme) or darker (light theme) shade to keep WCAG AA contrast.
+// ---------------------------------------------------------------------------------------------------------------------
+:root {
+  --brand: #8b5cf6;
+  --brand-ink: #ffffff;
+
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  --fs-base: 15px;
+  --radius: 6px;
+  --header-h: 56px;
+  --sidebar-w: 280px;
+  --toc-w: 220px;
+  --content-max: 820px;
+
+  // dark theme (default)
+  --bg: #0c0a10;
+  --bg-elev: #120f18;
+  --bg-code: #15111d;
+  --bg-hover: #1c1726;
+  --border: #272035;
+  --border-strong: #3a3050;
+  --text: #e7e2f0;
+  --text-muted: #a29ab3;
+  --text-dim: #6f6782;
+  --accent: #b388ff;
+  --accent-strong: #cfb3ff;
+  --accent-soft: rgba(139, 92, 246, 0.14);
+  --green: #7ee787;
+  --yellow: #e3b341;
+  --red: #ff7b72;
+  --cyan: #79c0ff;
+  --selection: rgba(139, 92, 246, 0.35);
+  --glow: 0 0 18px rgba(139, 92, 246, 0.35);
+
+  --logo-a: #ffffff;
+  --logo-b: var(--brand);
+
+  color-scheme: dark;
+}
+
+@mixin light-theme {
+  --bg: #fbfaff;
+  --bg-elev: #f4f1fb;
+  --bg-code: #f3effa;
+  --bg-hover: #ebe5f7;
+  --border: #e1daee;
+  --border-strong: #cbbfe3;
+  --text: #1b1624;
+  --text-muted: #57506a;
+  --text-dim: #847c96;
+  --accent: #6d28d9;
+  --accent-strong: #5b21b6;
+  --accent-soft: rgba(139, 92, 246, 0.12);
+  --green: #1a7f37;
+  --yellow: #9a6700;
+  --red: #cf222e;
+  --cyan: #0969da;
+  --selection: rgba(139, 92, 246, 0.25);
+  --glow: none;
+
+  --logo-a: #0e0b14;
+
+  color-scheme: light;
+}
+
+:root[data-theme="light"] { @include light-theme; }
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) { @include light-theme; }
+}

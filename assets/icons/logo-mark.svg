@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Split tone portal mark that follows the site theme through the logo-a / logo-b CSS custom properties
+       (see _sass/_tokens.scss). Fixed-color brand files live in assets/brand/svg/. -->
+  <symbol id="icon" viewBox="0 0 64 64">
+    <path d="M32 3A29 29 0 0 0 32 61Z" style="fill: var(--logo-a, #ffffff)"/>
+    <path d="M32 15A17 17 0 0 0 32 49Z" style="fill: var(--logo-b, #8b5cf6)"/>
+    <path d="M32 24A8 8 0 0 0 32 40Z" style="fill: var(--logo-a, #ffffff)"/>
+    <path d="M32 3A29 29 0 0 1 32 61Z" style="fill: var(--logo-b, #8b5cf6)"/>
+    <path d="M32 15A17 17 0 0 1 32 49Z" style="fill: var(--logo-a, #ffffff)"/>
+    <path d="M32 24A8 8 0 0 1 32 40Z" style="fill: var(--logo-b, #8b5cf6)"/>
+  </symbol>
+  <use href="#icon"/>
+</svg>

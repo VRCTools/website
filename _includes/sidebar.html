@@ -1,0 +1,61 @@
+{%- comment -%}
+Renders the navigation tree. Pages are grouped per package (front matter `package`) and section (`section`) and
+sorted by `nav_order`. Links and extra trees come from _data/navigation.yml. Set `nav_exclude: true` to hide a page or `nav_title` to use a shorter label.
+{%- endcomment -%}
+<aside class="sidebar" id="sidebar" aria-label="Documentation">
+    <nav>
+        <ul class="nav-root">
+            {%- for link in site.data.navigation.links %}
+            <li><a href="{{ link.url | relative_url }}" {% if page.url== link.url %} aria-current="page" {% endif %}>{{
+                link.title }}</a></li>
+            {%- endfor %}
+        </ul>
+
+        {%- for pkg in site.data.packages %}
+        {%- assign pkg_pages = site.pages | where: "package", pkg.id | where_exp: "p", "p.nav_exclude != true" %}
+        <details class="nav-pkg" {% if page.package== pkg.id or page.url==
+        "/" %} open{% endif %}>
+        <summary><span class="nav-pkg-name">{{ pkg.id }}/</span><span class="nav-pkg-ver">v{{ pkg.version }}</span>
+        </summary>
+        <ul class="tree">
+            {%- for sec in pkg.sections %}
+            {%- assign sec_pages = pkg_pages | where: "section", sec.id | sort: "nav_order", "last" %}
+            {%- if sec_pages.size == 0 %}{% continue %}{% endif %}
+            {%- if sec.id == "start" %}
+            {%- for p in sec_pages %}
+            <li><a href="{{ p.url | relative_url }}" {% if page.url== p.url %} aria-current="page" {% endif %}>{{
+                p.nav_title | default: p.title }}</a></li>
+            {%- endfor %}
+            {%- else %}
+            <li class="tree-dir">
+                <details
+                {% if page.package == pkg.id and page.section == sec.id %} open{% endif %}>
+                <summary>{{ sec.title }}</summary>
+                <ul class="tree">
+                    {%- for p in sec_pages %}
+                    <li><a href="{{ p.url | relative_url }}" {% if page.url== p.url %} aria-current="page" {% endif %}>{{
+                        p.nav_title | default: p.title }}</a></li>
+                    {%- endfor %}
+                </ul>
+                </details>
+            </li>
+            {%- endif %}
+            {%- endfor %}
+        </ul>
+        </details>
+        {%- endfor %}
+
+        {%- for sec in site.data.navigation.sections %}
+        {%- assign sec_urls = sec.pages | map: "url" %}
+        <details class="nav-pkg" {% if sec_urls contains page.url %} open{% endif %}>
+            <summary><span class="nav-pkg-name">{{ sec.title }}</span></summary>
+            <ul class="tree">
+                {%- for link in sec.pages %}
+                <li><a href="{{ link.url | relative_url }}" {% if page.url== link.url %} aria-current="page" {% endif
+                       %}>{{ link.title }}</a></li>
+                {%- endfor %}
+            </ul>
+        </details>
+        {%- endfor %}
+    </nav>
+</aside>

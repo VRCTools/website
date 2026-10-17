@@ -1,0 +1,39 @@
+// Rouge token colors tuned to the purple terminal palette
+:root {
+  --hl-comment: #6f6782;
+  --hl-keyword: #c792ea;
+  --hl-type: #82aaff;
+  --hl-string: #c3e88d;
+  --hl-number: #f78c6c;
+  --hl-func: #ffcb6b;
+  --hl-attr: #89ddff;
+  --hl-punct: #a29ab3;
+}
+@mixin light-hl {
+  --hl-comment: #847c96;
+  --hl-keyword: #7c3aed;
+  --hl-type: #0550ae;
+  --hl-string: #116329;
+  --hl-number: #b35900;
+  --hl-func: #8a4600;
+  --hl-attr: #0969da;
+  --hl-punct: #57506a;
+}
+:root[data-theme="light"] { @include light-hl; }
+@media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) { @include light-hl; } }
+
+.highlight {
+  .c, .ch, .cd, .cm, .cpf, .c1, .cs { color: var(--hl-comment); font-style: italic; }
+  .k, .kd, .kn, .kp, .kr, .kv, .ow { color: var(--hl-keyword); }
+  .kc { color: var(--hl-number); }
+  .kt, .nc, .nn, .no, .bp { color: var(--hl-type); }
+  .s, .sa, .sb, .sc, .dl, .s2, .se, .sh, .si, .sx, .sr, .s1, .ss { color: var(--hl-string); }
+  .m, .mb, .mf, .mh, .mi, .il, .mo { color: var(--hl-number); }
+  .nf, .fm, .nd { color: var(--hl-func); }
+  .na, .nt, .py, .nv, .vc, .vg, .vi { color: var(--hl-attr); }
+  .o, .p { color: var(--hl-punct); }
+  .gp { color: var(--brand); user-select: none; }
+  .gd { color: var(--red); }
+  .gi { color: var(--green); }
+  .err { color: var(--red); background: none; }
+}
