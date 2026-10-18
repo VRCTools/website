@@ -34,8 +34,8 @@ wraps all of that in a single call - `_TrySynchronize()` - and is the foundation
 
 | Field                       | Default | Description                                                                         |
 |-----------------------------|---------|-------------------------------------------------------------------------------------|
-| `synchronizationBackoff`    | `2`     | Seconds to wait before retrying a failed or congested synchronization. Values `<= 0` fall back to `1`. |
-| `synchronizationDebugging`  | `false` | Log every synchronization step (and configuration errors) to the game log.          |
+| `synchronizationBackoff`    | `2`     | Seconds to wait before retrying a failed or congested synchronization. The inspector enforces a minimum of `0.1`; values `<= 0` set from scripts fall back to `1` and log an error. |
+| `synchronizationDebugging`  | `false` | Log every synchronization step to the game log.                                     |
 
 ## Members for implementers
 
@@ -44,9 +44,27 @@ wraps all of that in a single call - `_TrySynchronize()` - and is the foundation
 | `protected _TrySynchronize()`        | Request synchronization of the current state. Only has an effect on the owner.          |
 | `protected _EnsureOwnership()`       | Transfers ownership of the game object to the local player if necessary.                |
 | `protected bool HasOngoingSynchronization` | `true` while a synchronization is in flight, scheduled for retry or queued.        |
+| `protected bool StateInitialized`    | `true` once the local state is authoritative - see [state initialization](#state-initialization). *Since v0.2.0.* |
+| `protected virtual OnStateInitialized()` | Called once when `StateInitialized` becomes `true`. *Since v0.2.0.*                 |
 
-The class implements `Start`, `Update`, `OnPlayerJoined`, `OnPlayerLeft`, `OnOwnershipTransferred` and
-`OnPostSerialization`. If you override any of them, **call the base implementation**.
+The class implements `Start`, `Update`, `OnPlayerJoined`, `OnPlayerLeft`, `OnOwnershipTransferred`,
+`OnPostSerialization` and - since v0.2.0 - `OnDeserialization`. If you override any of them, **call the base
+implementation**; skipping it may cause undefined behaviour.
+
+## State initialization
+
+A freshly joined client starts with the default values of its synced fields until the owner's state arrives.
+`StateInitialized` tells you when that phase is over. It becomes `true` - and `OnStateInitialized()` is called - the
+first time either of the following happens:
+
+- the local player, as owner, calls `_TrySynchronize()` (including the automatic call from `Start()` in a new
+  instance), making the local state authoritative, or
+- remote state is received through `OnDeserialization`.
+
+> Taking ownership with `_EnsureOwnership()` and changing values before `StateInitialized` is `true` may reset the
+> state of the whole instance to its defaults, because the local player then synchronizes values that never received
+> the previous owner's state. Guard user interactions with `StateInitialized` where this matters.
+{: .warning }
 
 ## Example
 
@@ -62,6 +80,8 @@ public class Scoreboard : AbstractSynchronizedBehaviour {
   public int Score => this._score;
 
   public void _AddPoint() {
+    if (!this.StateInitialized) return; // don't overwrite state we haven't received yet
+
     this._EnsureOwnership();   // writer becomes owner
     this._score++;
     this._TrySynchronize();    // reliably delivered, even when the network is busy
@@ -69,12 +89,16 @@ public class Scoreboard : AbstractSynchronizedBehaviour {
   }
 
   public override void OnDeserialization() {
+    base.OnDeserialization();  // required since v0.2.0 - tracks StateInitialized
     this._OnScoreChanged();    // remote players receive the new state here
   }
 
   protected override void Start() {
     base.Start();              // required - schedules the initial synchronization
-    this._OnScoreChanged();
+  }
+
+  protected override void OnStateInitialized() {
+    this._OnScoreChanged();    // state is now known - safe to show it
   }
 
   private void _OnScoreChanged() { /* update UI, ... */ }
