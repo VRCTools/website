@@ -16,9 +16,9 @@ url: "https://vrctools.io"
 baseurl: ""
 
 # Package repository which is added to Creator Companion (or ALCOM, vrc-get, ...)
-vpm_url: "https://vrctools.github.io/VPM/index.json"
+vpm_url: "https://vpm.vrctools.io/index.json"
 # Human-readable listing page of the package repository
-vpm_home: "https://vrctools.github.io/VPM/"
+vpm_home: "https://vpm.vrctools.io/"
 
 # Unity version required by the current VRChat SDK - update when VRChat moves to a new version.
 # Use `{{ site.unity_version }}` in pages instead of hard-coding the version.
