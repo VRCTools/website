@@ -52,6 +52,7 @@ Event ids must be in the range `0 .. EventCount - 1`.
 ```csharp
 using UdonSharp;
 using UnityEngine;
+using VRC.SDKBase;
 
 public class DoorbellSpeaker : UdonSharpBehaviour {
   public Doorbell doorbell;
@@ -62,6 +63,9 @@ public class DoorbellSpeaker : UdonSharpBehaviour {
   }
 
   private void OnDestroy() {
+    // the emitter may have been destroyed first (e.g. during scene teardown)
+    if (!Utilities.IsValid(this.doorbell)) return;
+
     // remove this handler from every event of the emitter...
     this.doorbell._UnregisterHandler(this);
     // ...or from a single event:
@@ -85,16 +89,21 @@ public class DoorbellSpeaker : UdonSharpBehaviour {
 | `_UnregisterHandler(int eventId, UdonSharpBehaviour handler, string eventName)` | Removes one specific registration.                         |
 | `protected _EmitEvent(int eventId)`                           | Calls all handlers registered for the event.                                   |
 | `bool IsUpdatingHandlers`                                     | `true` while the emitter is calling its handlers.                              |
+| `protected _CleanupHandlers()`                                | Removes registrations of destroyed handlers. Called automatically when registering or unregistering for a single event. |
 
 ## Rules & gotchas
 
 - **Handlers must be `public`.** They are invoked by name through `SendCustomEvent`.
-- **No registration during emission.** Calling `_RegisterHandler` on an emitter while it is emitting is rejected with
-  an error. Register in `Start()` or defer with `SendCustomEventDelayedFrames`.
+- **No registration changes during emission.** While an emitter is calling its handlers (e.g. from within a handler
+  function), `_RegisterHandler`, both `_UnregisterHandler` overloads and `_CleanupHandlers` are rejected with an error.
+  Check `IsUpdatingHandlers` if necessary, and register in `Start()` or defer the change with
+  `SendCustomEventDelayedFrames`. *Before v0.3.0, unregistering was not rejected and could cause other handlers to be
+  skipped or invoked twice.*
 - **Events before registration are lost.** Emitters don't queue events. If the emitter publishes an initial state from
   its own `Start()`, read that state yourself after registering.
 - **Unregister when you go away.** Handlers belonging to destroyed objects are skipped with a warning, but explicitly
-  unregistering in `OnDestroy()` keeps the handler lists clean.
+  unregistering in `OnDestroy()` keeps the handler lists clean. Check that the emitter still exists first - it may
+  have been destroyed before your handler.
 - **Emitters are `UdonSharpBehaviour`s.** Udon# cannot compile interfaces, so emitting requires extending one of the
   abstract base classes.
 
@@ -104,6 +113,13 @@ public class DoorbellSpeaker : UdonSharpBehaviour {
 [`AbstractSynchronizedBehaviour`]({{ site.baseurl }}/docs/common/synchronized-behaviour/) base class from the
 [Common Library]({{ site.baseurl }}/docs/common/), which adds congestion aware manual synchronization with automatic retries. World Utilities'
 [synchronized values]({{ site.baseurl }}/docs/world-utils/concepts/value-kinds/#synchronized) are built on it.
+
+- **Events are not networked.** Only the emitter's own synced state is synchronized. Handlers are invoked only on
+  the client that calls `_EmitEvent`; to notify handlers on remote clients too, emit the event from
+  `OnDeserialization` (or a similar callback) as well.
+- **Call the base implementation** of every lifecycle method you override (`Start`, `Update`, `OnDeserialization`,
+  `OnPostSerialization`, ...), as required by
+  [`AbstractSynchronizedBehaviour`]({{ site.baseurl }}/docs/common/synchronized-behaviour/#members-for-implementers).
 
 ## Changelog
 
