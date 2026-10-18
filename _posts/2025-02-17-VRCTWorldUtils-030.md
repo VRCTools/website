@@ -6,7 +6,10 @@ tags: [VRCTWorldUtils]
 
 ---
 
-- Added the [Boolean Operation Converter]({{ site.baseurl }}/docs/world-utils/converters/boolean-operation/)
-- Added support for setting global material parameters
-- Added the [Fake Skybox shader]({{ site.baseurl }}/docs/world-utils/utilities/fake-skybox/)
-- Refactored various components to be value agnostic (they now work with both local and synchronized values)
+✨ Added
+- [Boolean Operation Converter]({{ site.baseurl }}/docs/world-utils/converters/boolean-operation/)
+- Support for setting global material parameters
+- [Fake Skybox shader]({{ site.baseurl }}/docs/world-utils/utilities/fake-skybox/)
+
+🔧 Changed
+- Various components are now value agnostic and work with both local and synchronized values

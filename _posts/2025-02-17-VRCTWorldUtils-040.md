@@ -6,4 +6,5 @@ tags: [VRCTWorldUtils]
 
 ---
 
-- Added the [Animator Parameter Applicator]({{ site.baseurl }}/docs/world-utils/applicators/animator-parameter/)
+✨ Added
+- [Animator Parameter Applicator]({{ site.baseurl }}/docs/world-utils/applicators/animator-parameter/)

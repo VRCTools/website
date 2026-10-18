@@ -7,8 +7,9 @@ redirect_from:
   - /2025/01/26/VRCTWorldUtils-010.html
 ---
 
+✨ Added
 - Initial release
-- Added support for local values
-- Added support for synchronized values
-- Added various local & synchronized applicators
-- Added various local & synchronized converters
+- Local values
+- Synchronized values
+- Various local and synchronized applicators
+- Various local and synchronized converters

@@ -6,4 +6,5 @@ tags: [VRCTWorldUtils]
 
 ---
 
-- Fixed a build issue which prevented image files from being included properly
+🐞 Fixed
+- A build issue prevented image files from being included in the package

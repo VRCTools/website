@@ -6,8 +6,13 @@ tags: [VRCTWorldUtils]
 
 ---
 
-- Added support for [persisted values]({{ site.baseurl }}/docs/world-utils/concepts/value-kinds/#persisted)
-- Added a dependency on the new VRCTools common library
-- Updated to VRCTEvent 0.2.0
+✨ Added
+- [Persisted values]({{ site.baseurl }}/docs/world-utils/concepts/value-kinds/#persisted)
+
+🔧 Changed
+- `io.vrctools.common` is now required
+- Updated to `io.vrctools.event` 0.2.0
 - Improved logging
-- Fixed an issue which prevented certain applicators from correctly registering with synchronized values
+
+🐞 Fixed
+- Certain applicators did not register correctly with synchronized values
