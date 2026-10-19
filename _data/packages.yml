@@ -41,13 +41,13 @@
   short: VRCTCommon
   tag: VRCTCommon
   vpm_id: io.vrctools.common
-  version: 0.2.1
+  version: 0.3.1
   repo: https://github.com/VRCTools/VRCTCommon
   source_root: https://github.com/VRCTools/VRCTCommon/blob/main/Packages/io.vrctools.common/
   path: /docs/common/
   summary: >-
-    Shared building blocks for UdonSharp scripts - a congestion aware base class for synchronized behaviours plus
-    array and animator helpers. Used by the other VRCTools packages.
+    Shared building blocks for UdonSharp scripts - a congestion aware base class for synchronized behaviours, logging,
+    ownership, array and animator helpers plus editor checked attributes. Used by the other VRCTools packages.
   sections:
     - { id: start, title: Start here }
     - { id: reference, title: Reference }
