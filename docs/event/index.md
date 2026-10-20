@@ -151,6 +151,10 @@ and start with the emitter's type and object name (`[Doorbell#Front Door] ...`) 
   `OnPostSerialization`, ...), as required by
   [`AbstractSynchronizedBehaviour`]({{ site.baseurl }}/docs/common/synchronized-behaviour/#members-for-implementers).
 
+> In v0.4.0, `AbstractSynchronizedEventEmitter` fails to compile: its internal log methods clash with those of
+> `AbstractSynchronizedBehaviour`, and Udon# does not support hiding methods. Update to v0.4.1 or later.
+{: .danger }
+
 ## Changelog
 
 See the [release history]({{ site.baseurl }}/docs/event/changelog/).
